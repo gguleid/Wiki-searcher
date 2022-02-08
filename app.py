@@ -15,14 +15,14 @@ def wiki(term):
     # stores data in results
 # Using Try and except to handle disambiguation errrors
     try:
-        link = wikipedia.page(term).url
-        return jsonify(link)
+        link = wikipedia.WikipediaPage(term).url
+        return jsonify(links=link)
     except Exception as error:
         results = error.options
 
         for result in results:
             try:
-                links.append(wikipedia.page(result).url)
+                links.append(wikipedia.WikipediaPage(result).url)
             except Exception as error:
                 print("This is the error for result: " + result)
     return jsonify(links=links)
